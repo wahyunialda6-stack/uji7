@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PPG PHOTOBOOTH 2026 - Gelar Karya Kelompok B PPKn</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts for Vintage Wanted Poster typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rye&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Special+Elite&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            vintage: {
+              bg: '#f4ebd0',
+              paper: '#ebdcb9',
+              dark: '#211c18',
+              border: '#3a322a',
+              accent: '#8c2d19',
+              gold: '#c49a45'
+            }
+          },
+          fontFamily: {
+            rye: ['Rye', 'serif'],
+            playfair: ['Playfair Display', 'serif'],
+            vintage: ['Special Elite', 'monospace'],
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Vintage Paper Texture & Typography Styling */
+    body {
+      background-color: #1a1816;
+      color: #211c18;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .wanted-bg {
+      background-color: #f4ebd0;
+      background-image: radial-gradient(#e2d5b0 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+
+    .vintage-border {
+      border: 3px double #3a322a;
+    }
+
+    /* Custom Canvas & Video Styling */
+    .video-mirror {
+      transform: scaleX(-1);
+    }
+
+    /* Loader Pulse */
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+    .pulse-animation {
+      animation: pulse-ring 2s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="min-h-screen text-slate-100 antialiased selection:bg-amber-500 selection:text-black">
+
+  <div id="app" class="min-h-screen flex flex-col">
+    <!-- Header Navbar -->
+    <header class="bg-zinc-900 border-b border-zinc-800 py-3 px-4 sm:px-8 flex justify-between items-center sticky top-0 z-50">
+      <div class="flex items-center space-x-3">
+        <div class="w-9 h-9 rounded-lg bg-amber-600 flex items-center justify-center text-zinc-950 font-bold text-xl font-rye shadow-lg shadow-amber-600/20">
+          P
+        </div>
+        <div>
+          <h1 class="font-bold text-amber-500 tracking-wide text-sm sm:text-base leading-tight">PPG PHOTOBOOTH</h1>
+          <p class="text-xs text-zinc-400">Gelar Karya Kelompok B PPKn 2026</p>
+        </div>
+      </div>
+      <div id="step-indicator" class="hidden sm:flex items-center space-x-2 text-xs font-medium text-zinc-400 bg-zinc-800/80 px-3 py-1.5 rounded-full border border-zinc-700">
+        <span id="step-1-badge" class="px-2 py-0.5 rounded text-amber-400 font-bold">1. Beranda</span>
+        <i class="fa-solid fa-chevron-right text-[10px] text-zinc-600"></i>
+        <span id="step-2-badge" class="px-2 py-0.5 rounded">2. Foto</span>
+        <i class="fa-solid fa-chevron-right text-[10px] text-zinc-600"></i>
+        <span id="step-3-badge" class="px-2 py-0.5 rounded">3. Filter & Poster</span>
+        <i class="fa-solid fa-chevron-right text-[10px] text-zinc-600"></i>
+        <span id="step-4-badge" class="px-2 py-0.5 rounded">4. Bayar & Unduh</span>
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-1 flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 max-w-6xl mx-auto w-full">
+
+      <!-- ================= STEP 1: WELCOME SCREEN ================= -->
+      <section id="screen-welcome" class="w-full max-w-2xl flex flex-col items-center text-center space-y-6">
+        <div class="wanted-bg p-6 sm:p-10 rounded-2xl border-4 border-amber-900/60 shadow-2xl w-full text-zinc-900 relative overflow-hidden">
+          
+          <!-- Decorative Corners -->
+          <div class="absolute top-2 left-2 text-amber-900/40 text-2xl">✦</div>
+          <div class="absolute top-2 right-2 text-amber-900/40 text-2xl">✦</div>
+          <div class="absolute bottom-2 left-2 text-amber-900/40 text-2xl">✦</div>
+          <div class="absolute bottom-2 right-2 text-amber-900/40 text-2xl">✦</div>
+
+          <div class="border-2 border-dashed border-amber-900/40 p-6 rounded-xl">
+            <span class="inline-block bg-amber-900 text-amber-100 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-3">
+              Special Event 2026
+            </span>
+            <h1 class="text-3xl sm:text-5xl font-black font-rye tracking-wider text-amber-950 mb-2">
+              PPG PHOTOBOOTH
+            </h1>
+            <p class="font-bold text-amber-900 text-sm sm:text-base tracking-widest uppercase mb-4">
+              PPG Calon Guru Gelombang 2 Tahun 2026
+            </p>
+            
+            <div class="h-0.5 bg-amber-900/30 w-3/4 mx-auto my-4"></div>
+            
+            <h2 class="text-xl sm:text-2xl font-semibold text-zinc-800 font-playfair mb-3">
+              Gelar Karya Kelompok B PPKn
+            </h2>
+            
+            <p class="text-zinc-700 italic max-w-md mx-auto text-sm sm:text-base mb-6">
+              “Abadikan momen kebersamaan dan kreativitas dalam Gelar Karya PPG Calon Guru.”
+            </p>
+
+            <div class="bg-amber-100/80 border border-amber-900/30 rounded-xl p-4 max-w-xs mx-auto mb-6 shadow-inner">
+              <span class="block text-xs uppercase tracking-wider text-zinc-600 font-bold">Biaya Sesi Photobooth</span>
+              <span class="text-2xl sm:text-3xl font-black text-amber-950 font-vintage">Rp 15.000</span>
+              <span class="block text-[11px] text-zinc-500 mt-0.5">Mendapatkan 1 Poster Vintage 4-Pose A4 HD</span>
+            </div>
+
+            <button id="btn-start" onclick="goToStep(2)" class="w-full sm:w-auto px-8 py-4 bg-amber-700 hover:bg-amber-800 text-amber-50 font-bold text-lg rounded-xl shadow-lg hover:shadow-amber-900/40 transition transform active:scale-95 flex items-center justify-center space-x-3 mx-auto">
+              <i class="fa-solid fa-camera text-xl"></i>
+              <span>MULAI PHOTOBOOTH</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="text-xs text-zinc-500 flex items-center space-x-4">
+          <span><i class="fa-solid fa-shield-halved text-amber-600 mr-1"></i> Tanpa Install Aplikasi</span>
+          <span><i class="fa-solid fa-bolt text-amber-600 mr-1"></i> Cetak/Unduh Instan</span>
+        </div>
+      </section>
+
+
+      <!-- ================= STEP 2: CAMERA CAPTURE ================= -->
+      <section id="screen-camera" class="hidden w-full max-w-4xl flex-col items-center space-y-6">
+        <div class="w-full flex justify-between items-center text-zinc-300 bg-zinc-900/80 p-4 rounded-xl border border-zinc-800">
+          <div>
+            <h2 class="font-bold text-amber-400 text-lg">Ambil 4 Foto Sesi</h2>
+            <p class="text-xs text-zinc-400">Posisikan diri Anda di tengah bingkai kamera.</p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <button id="btn-switch-camera" onclick="switchCamera()" class="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-xs font-medium rounded-lg border border-zinc-700 transition">
+              <i class="fa-solid fa-rotate text-amber-500 mr-1"></i> Ganti Kamera
+            </button>
+            <label class="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-xs font-medium rounded-lg border border-zinc-700 transition cursor-pointer">
+              <i class="fa-solid fa-upload text-amber-500 mr-1"></i> Unggah File
+              <input type="file" accept="image/*" multiple onchange="handleFileUpload(event)" class="hidden">
+            </label>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+          <!-- Live Viewfinder -->
+          <div class="md:col-span-2 flex flex-col items-center">
+            <div id="camera-container" class="relative w-full aspect-[4/3] bg-zinc-950 rounded-2xl overflow-hidden border-2 border-zinc-800 shadow-2xl flex items-center justify-center">
+              
+              <!-- Video Stream -->
+              <video id="video" autoplay playsinline class="w-full h-full object-cover video-mirror"></video>
+
+              <!-- Countdown Overlay -->
+              <div id="countdown-overlay" class="absolute inset-0 bg-black/60 backdrop-blur-xs hidden flex items-center justify-center z-20">
+                <span id="countdown-text" class="text-9xl font-black text-amber-500 font-rye animate-ping">3</span>
+              </div>
+
+              <!-- Camera Status / Error Overlay -->
+              <div id="camera-error" class="hidden absolute inset-0 bg-zinc-900/95 p-6 flex flex-col items-center justify-center text-center space-y-3 z-30">
+                <i class="fa-solid fa-video-slash text-4xl text-rose-500"></i>
+                <p class="font-semibold text-zinc-200" id="camera-error-msg">Akses kamera tidak tersedia.</p>
+                <p class="text-xs text-zinc-400 max-w-xs">Pastikan Anda telah memberikan izin kamera atau gunakan tombol "Unggah File" untuk menggunakan foto dari galeri.</p>
+                <button onclick="initCamera()" class="mt-2 px-4 py-2 bg-amber-600 text-zinc-950 text-xs font-bold rounded-lg hover:bg-amber-500">Coba Lagi</button>
+              </div>
+
+              <!-- Shutter Flash -->
+              <div id="shutter-flash" class="absolute inset-0 bg-white opacity-0 transition-opacity duration-200 pointer-events-none z-40"></div>
+            </div>
+
+            <!-- Controls -->
+            <div class="mt-4 flex items-center space-x-4">
+              <button id="btn-capture" onclick="startPhotoSequence()" class="px-8 py-3.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black text-base rounded-full shadow-lg shadow-amber-500/20 transition transform active:scale-95 flex items-center space-x-2">
+                <i class="fa-solid fa-camera"></i>
+                <span>AMBIL FOTO SERI (4x)</span>
+              </button>
+              <button id="btn-retake" onclick="resetPhotos()" class="hidden px-4 py-3 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-medium text-sm rounded-full border border-zinc-700 transition">
+                <i class="fa-solid fa-arrows-rotate mr-1"></i> Foto Ulang
+              </button>
+            </div>
+          </div>
+
+          <!-- Photo Slot Preview Grid -->
+          <div class="flex flex-col space-y-3 bg-zinc-900/60 p-4 rounded-2xl border border-zinc-800">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1 flex items-center justify-between">
+              <span>Hasil Foto (<span id="photo-count">0</span>/4)</span>
+              <span class="text-[10px] text-amber-500 font-normal">Otomatis 4 Pose</span>
+            </h3>
+
+            <div class="grid grid-cols-2 gap-2 flex-1">
+              <div id="slot-0" class="relative aspect-[4/3] bg-zinc-950 rounded-lg border border-dashed border-zinc-700 overflow-hidden flex items-center justify-center">
+                <span class="text-xs text-zinc-600 font-bold">#1</span>
+              </div>
+              <div id="slot-1" class="relative aspect-[4/3] bg-zinc-950 rounded-lg border border-dashed border-zinc-700 overflow-hidden flex items-center justify-center">
+                <span class="text-xs text-zinc-600 font-bold">#2</span>
+              </div>
+              <div id="slot-2" class="relative aspect-[4/3] bg-zinc-950 rounded-lg border border-dashed border-zinc-700 overflow-hidden flex items-center justify-center">
+                <span class="text-xs text-zinc-600 font-bold">#3</span>
+              </div>
+              <div id="slot-3" class="relative aspect-[4/3] bg-zinc-950 rounded-lg border border-dashed border-zinc-700 overflow-hidden flex items-center justify-center">
+                <span class="text-xs text-zinc-600 font-bold">#4</span>
+              </div>
+            </div>
+
+            <button id="btn-next-filter" disabled onclick="goToStep(3)" class="w-full py-3 bg-zinc-800 text-zinc-500 font-bold rounded-xl transition cursor-not-allowed text-sm flex items-center justify-center space-x-2">
+              <span>LANJUT KE FILTER & POSTER</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ================= STEP 3: FILTERS & POSTER PREVIEW ================= -->
+      <section id="screen-filter" class="hidden w-full max-w-5xl flex-col items-center space-y-6">
+        
+        <div class="w-full flex justify-between items-center text-zinc-300 bg-zinc-900/80 p-4 rounded-xl border border-zinc-800">
+          <div>
+            <h2 class="font-bold text-amber-400 text-lg">Pilih Filter & Preview Poster</h2>
+            <p class="text-xs text-zinc-400">Atur filter visual untuk menyempurnakan Wanted Poster PPG 2026.</p>
+          </div>
+          <button onclick="goToStep(2)" class="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-xs font-medium rounded-lg border border-zinc-700 transition">
+            <i class="fa-solid fa-chevron-left mr-1"></i> Kembali ke Foto
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full items-start">
+          
+          <!-- Filter Controls Side Panel -->
+          <div class="lg:col-span-4 bg-zinc-900/80 p-5 rounded-2xl border border-zinc-800 space-y-5">
+            <div>
+              <h3 class="text-sm font-bold text-amber-400 uppercase tracking-wider mb-3">Pilihan Filter Foto</h3>
+              <div class="grid grid-cols-2 gap-2" id="filter-buttons-container">
+                <!-- Buttons injected by JS -->
+              </div>
+            </div>
+
+            <div class="h-px bg-zinc-800"></div>
+
+            <div class="space-y-3">
+              <label class="text-xs text-zinc-400 font-medium block">Pengaturan Mode Filter:</label>
+              <div class="flex rounded-lg bg-zinc-950 p-1 border border-zinc-800 text-xs font-medium">
+                <button id="mode-all" onclick="setFilterApplyMode('all')" class="flex-1 py-1.5 rounded-md text-center bg-amber-600 text-zinc-950 font-bold">Semua Foto</button>
+                <button id="mode-individual" onclick="setFilterApplyMode('individual')" class="flex-1 py-1.5 rounded-md text-center text-zinc-400 hover:text-zinc-200">Per Foto</button>
+              </div>
+            </div>
+
+            <div id="individual-photo-selectors" class="hidden space-y-2">
+              <label class="text-xs text-zinc-400 font-medium block">Pilih Foto untuk Diubah Filter:</label>
+              <div class="grid grid-cols-4 gap-1.5">
+                <button onclick="setSelectedPhotoIndex(0)" class="photo-idx-btn px-2 py-1 text-xs rounded bg-amber-600 text-zinc-950 font-bold border border-amber-500">#1</button>
+                <button onclick="setSelectedPhotoIndex(1)" class="photo-idx-btn px-2 py-1 text-xs rounded bg-zinc-800 text-zinc-400 border border-zinc-700">#2</button>
+                <button onclick="setSelectedPhotoIndex(2)" class="photo-idx-btn px-2 py-1 text-xs rounded bg-zinc-800 text-zinc-400 border border-zinc-700">#3</button>
+                <button onclick="setSelectedPhotoIndex(3)" class="photo-idx-btn px-2 py-1 text-xs rounded bg-zinc-800 text-zinc-400 border border-zinc-700">#4</button>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <button onclick="goToStep(4)" class="w-full py-3 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-sm rounded-xl shadow-lg transition flex items-center justify-center space-x-2">
+                <span>LANJUT KE PEMBAYARAN</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Canvas Preview Area -->
+          <div class="lg:col-span-8 flex flex-col items-center justify-center">
+            <div class="relative w-full max-w-[420px] bg-zinc-950 p-2 rounded-2xl border-2 border-zinc-800 shadow-2xl overflow-hidden flex flex-col items-center">
+              
+              <!-- Real HTML5 Canvas for Poster Output -->
+              <canvas id="poster-canvas" width="1240" height="1754" class="w-full h-auto rounded shadow-lg bg-vintage-bg"></canvas>
+              
+              <div id="canvas-loading" class="absolute inset-0 bg-zinc-950/80 backdrop-blur-xs flex flex-col items-center justify-center text-amber-500 space-y-2 hidden">
+                <i class="fa-solid fa-circle-notch fa-spin text-3xl"></i>
+                <span class="text-xs font-semibold text-zinc-300">Merender Poster Vintage A4...</span>
+              </div>
+            </div>
+            <p class="text-[11px] text-zinc-500 mt-2 text-center">
+              *Poster dirancang dalam rasio A4 Portrait (2480 × 3508px saat diunduh).
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ================= STEP 4: PAYMENT & DOWNLOAD ================= -->
+      <section id="screen-payment" class="hidden w-full max-w-xl flex-col items-center space-y-6">
+        
+        <div class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shadow-2xl text-zinc-200">
+          <div class="flex items-center space-x-3 mb-6 border-b border-zinc-800 pb-4">
+            <div class="w-10 h-10 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-500">
+              <i class="fa-solid fa-receipt text-lg"></i>
+            </div>
+            <div>
+              <h2 class="text-lg font-bold text-amber-400">Rincian & Pembayaran Tunai</h2>
+              <p class="text-xs text-zinc-400">Konfirmasi pembayaran tunai di kasir untuk mengunduh file A4.</p>
+            </div>
+          </div>
+
+          <!-- Order Summary Card -->
+          <div class="bg-zinc-950 rounded-xl p-4 border border-zinc-800/80 space-y-3 mb-6">
+            <div class="flex justify-between text-sm">
+              <span class="text-zinc-400">Item Produk:</span>
+              <span class="font-semibold text-zinc-200">Photobooth PPG 2026 (A4 HD)</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-zinc-400">Sesi Foto:</span>
+              <span class="font-semibold text-zinc-200">1 Sesi (4 Pose)</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-zinc-400">Metode Pembayaran:</span>
+              <span class="font-semibold text-emerald-400 bg-emerald-950/50 px-2 py-0.5 rounded border border-emerald-800/40 text-xs">
+                <i class="fa-solid fa-money-bill-wave mr-1"></i> Tunai (Cash)
+              </span>
+            </div>
+            <div class="h-px bg-zinc-800 my-1"></div>
+            <div class="flex justify-between items-center text-base pt-1">
+              <span class="font-bold text-zinc-300">Total Biaya:</span>
+              <span class="text-2xl font-black text-amber-400 font-vintage">Rp 15.000</span>
+            </div>
+          </div>
+
+          <!-- Status Indicator -->
+          <div id="payment-status-box" class="mb-6 p-4 rounded-xl border bg-amber-950/20 border-amber-800/40 text-amber-300 flex items-start space-x-3">
+            <i class="fa-solid fa-clock text-lg mt-0.5 text-amber-400"></i>
+            <div class="text-xs space-y-1">
+              <p class="font-bold text-amber-300 text-sm">Menunggu Konfirmasi Pembayaran</p>
+              <p class="text-amber-200/80">Silahkan serahkan uang tunai sebesar <strong>Rp 15.000</strong> kepada petugas Gelar Karya, lalu tekan tombol konfirmasi di bawah ini.</p>
+            </div>
+          </div>
+
+          <!-- Payment Buttons -->
+          <div class="space-y-3">
+            <button id="btn-confirm-pay" onclick="openPaymentModal()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-zinc-950 font-black text-base rounded-xl shadow-lg transition flex items-center justify-center space-x-2">
+              <i class="fa-solid fa-check-circle text-lg"></i>
+              <span>KONFIRMASI PEMBAYARAN TUNAI</span>
+            </button>
+
+            <button id="btn-download-poster" disabled onclick="downloadPoster()" class="w-full py-4 bg-zinc-800 text-zinc-500 font-bold text-base rounded-xl border border-zinc-700 transition cursor-not-allowed flex items-center justify-center space-x-2">
+              <i class="fa-solid fa-download text-lg"></i>
+              <span>UNDUH POSTER VINTAGE (PNG A4)</span>
+            </button>
+
+            <button onclick="goToStep(3)" class="w-full py-2.5 bg-transparent hover:bg-zinc-800 text-zinc-400 text-xs font-semibold rounded-lg transition">
+              <i class="fa-solid fa-arrow-left mr-1"></i> Kembali Ubah Filter
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Footer Information -->
+    <footer class="bg-zinc-950 border-t border-zinc-900 py-4 px-4 text-center text-xs text-zinc-500 space-y-1">
+      <p>© 2026 PPG Calon Guru Gelombang 2 - Gelar Karya Kelompok B PPKn</p>
+      <p class="text-[10px] text-zinc-600">Built with Next.js Architecture, HTML5 Canvas API & Tailwind CSS</p>
+    </footer>
+  </div>
+
+
+  <!-- ================= PAYMENT CONFIRMATION MODAL ================= -->
+  <div id="modal-payment" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-md w-full p-6 shadow-2xl text-zinc-100 space-y-4 animate-scaleUp">
+      <div class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl mx-auto">
+        <i class="fa-solid fa-hand-holding-dollar"></i>
+      </div>
+      <div class="text-center">
+        <h3 class="text-xl font-bold text-zinc-100">Konfirmasi Pembayaran</h3>
+        <p class="text-xs text-zinc-400 mt-1">Apakah Anda telah menyerahkan uang tunai sebesar <span class="text-amber-400 font-bold">Rp 15.000</span> kepada kasir / petugas booth?</p>
+      </div>
+
+      <div class="bg-zinc-950 p-3 rounded-lg border border-zinc-800 text-xs text-zinc-400 space-y-1">
+        <div class="flex justify-between">
+          <span>Nominal:</span>
+          <span class="font-bold text-zinc-200">Rp 15.000</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Petugas Sesi:</span>
+          <span class="font-bold text-zinc-200">Kelompok B PPKn</span>
+        </div>
+      </div>
+
+      <div class="flex space-x-3 pt-2">
+        <button onclick="closePaymentModal()" class="flex-1 py-3 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-bold text-sm rounded-xl transition">
+          Kembali
+        </button>
+        <button onclick="processPaymentConfirmation()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 text-zinc-950 font-black text-sm rounded-xl shadow-lg transition">
+          Ya, Konfirmasi
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= APPLICATION JAVASCRIPT LOGIC ================= -->
+  <script>
+    // Global Application State Variables
+    let currentStep = 1;
+    let mediaStream = null;
+    let availableCameras = [];
+    let currentCameraIndex = 0;
+    
+    // Photo Storage (4 slots DataURLs)
+    let capturedPhotos = [null, null, null, null];
+    
+    // Filters Definition
+    const FILTERS = [
+      { id: 'original', name: 'Original', filter: 'none' },
+      { id: 'vintage', name: 'Vintage', filter: 'sepia(0.35) contrast(1.15) brightness(0.95) saturate(0.85)' },
+      { id: 'bw', name: 'Black & White', filter: 'grayscale(1) contrast(1.2)' },
+      { id: 'sepia', name: 'Sepia', filter: 'sepia(0.85) contrast(1.1)' },
+      { id: 'warm', name: 'Warm', filter: 'sepia(0.2) saturate(1.3) hue-rotate(-10deg)' },
+      { id: 'cool', name: 'Cool', filter: 'saturate(0.9) hue-rotate(15deg) contrast(1.05)' },
+      { id: 'contrast', name: 'High Contrast', filter: 'contrast(1.4) brightness(0.95)' },
+      { id: 'soft', name: 'Soft Film', filter: 'brightness(1.05) contrast(0.9) saturate(0.85)' }
+    ];
+
+    // Filter Apply State
+    let applyMode = 'all'; // 'all' or 'individual'
+    let photoFilters = ['vintage', 'vintage', 'vintage', 'vintage']; // Default vintage filter per photo slot
+    let selectedPhotoIndex = 0;
+
+    // Payment state
+    let isPaymentConfirmed = false;
+
+    // DOM Elements Cache
+    const video = document.getElementById('video');
+    const posterCanvas = document.getElementById('poster-canvas');
+    const ctx = posterCanvas.getContext('2d');
+
+    // Lifecycle Initialization
+    window.onload = function() {
+      initFilterButtons();
+      renderStepView();
+    };
+
+    // Step Routing Handler (Single Page App State Controller)
+    function goToStep(step) {
+      currentStep = step;
+      renderStepView();
+
+      if (step === 2) {
+        initCamera();
+      } else {
+        stopCamera();
+      }
+
+      if (step === 3) {
+        renderWantedPosterCanvas();
+      }
+    }
+
+    function renderStepView() {
+      // Toggle Screens
+      document.getElementById('screen-welcome').classList.toggle('hidden', currentStep !== 1);
+      document.getElementById('screen-camera').classList.toggle('hidden', currentStep !== 2);
+      document.getElementById('screen-filter').classList.toggle('hidden', currentStep !== 3);
+      document.getElementById('screen-payment').classList.toggle('hidden', currentStep !== 4);
+
+      // Update Header Badges
+      for (let i = 1; i <= 4; i++) {
+        const badge = document.getElementById(`step-${i}-badge`);
+        if (badge) {
+          if (i === currentStep) {
+            badge.className = 'px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 font-bold border border-amber-500/40';
+          } else {
+            badge.className = 'px-2 py-0.5 rounded text-zinc-500';
+          }
+        }
+      }
+    }
+
+    /* ================= E. CAMERA CAPTURE LOGIC ================= */
+    async function initCamera() {
+      const errorEl = document.getElementById('camera-error');
+      errorEl.classList.add('hidden');
+
+      try {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          throw new Error('Browser Anda tidak mendukung kamera API.');
+        }
+
+        // List cameras
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        availableCameras = devices.filter(d => d.kind === 'videoinput');
+
+        const constraints = {
+          video: availableCameras.length > 0 ? {
+            deviceId: availableCameras[currentCameraIndex] ? { exact: availableCameras[currentCameraIndex].deviceId } : undefined,
+            width: { ideal: 1280 },
+            height: { ideal: 960 },
+            facingMode: 'user'
+          } : true,
+          audio: false
+        };
+
+        if (mediaStream) {
+          stopCamera();
+        }
+
+        mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
+        video.srcObject = mediaStream;
+      } catch (err) {
+        console.error('Camera Error:', err);
+        document.getElementById('camera-error-msg').innerText = err.message || 'Izin kamera ditolak atau kamera tidak ditemukan.';
+        errorEl.classList.remove('hidden');
+      }
+    }
+
+    function stopCamera() {
+      if (mediaStream) {
+        mediaStream.getTracks().forEach(track => track.stop());
+        mediaStream = null;
+      }
+    }
+
+    function switchCamera() {
+      if (availableCameras.length > 1) {
+        currentCameraIndex = (currentCameraIndex + 1) % availableCameras.length;
+        initCamera();
+      } else {
+        alert('Hanya 1 periferal kamera yang terdeteksi.');
+      }
+    }
+
+    async function startPhotoSequence() {
+      const btnCapture = document.getElementById('btn-capture');
+      btnCapture.disabled = true;
+      btnCapture.classList.add('opacity-50');
+
+      capturedPhotos = [null, null, null, null];
+      updatePhotoGridUI();
+
+      for (let i = 0; i < 4; i++) {
+        await runCountdown(3);
+        flashShutter();
+        const photoData = captureSingleFrame();
+        capturedPhotos[i] = photoData;
+        updatePhotoGridUI();
+        await new Promise(resolve => setTimeout(resolve, 600));
+      }
+
+      btnCapture.disabled = false;
+      btnCapture.classList.remove('opacity-50');
+      document.getElementById('btn-retake').classList.remove('hidden');
+    }
+
+    function runCountdown(seconds) {
+      return new Promise((resolve) => {
+        const overlay = document.getElementById('countdown-overlay');
+        const text = document.getElementById('countdown-text');
+        overlay.classList.remove('hidden');
+        
+        let count = seconds;
+        text.innerText = count;
+
+        const interval = setInterval(() => {
+          count--;
+          if (count > 0) {
+            text.innerText = count;
+          } else {
+            clearInterval(interval);
+            overlay.classList.add('hidden');
+            resolve();
+          }
+        }, 800);
+      });
+    }
+
+    function flashShutter() {
+      const flash = document.getElementById('shutter-flash');
+      flash.classList.remove('opacity-0');
+      flash.classList.add('opacity-100');
+      setTimeout(() => {
+        flash.classList.remove('opacity-100');
+        flash.classList.add('opacity-0');
+      }, 150);
+    }
+
+    function captureSingleFrame() {
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = video.videoWidth || 1280;
+      tempCanvas.height = video.videoHeight || 960;
+      const tCtx = tempCanvas.getContext('2d');
+
+      // Mirror video frame horizontally for natural look
+      tCtx.translate(tempCanvas.width, 0);
+      tCtx.scale(-1, 1);
+      tCtx.drawImage(video, 0, 0, tempCanvas.width, tempCanvas.height);
+
+      return tempCanvas.toDataURL('image/png');
+    }
+
+    function handleFileUpload(event) {
+      const files = Array.from(event.target.files).slice(0, 4);
+      if (files.length === 0) return;
+
+      let loadedCount = 0;
+      files.forEach((file, index) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          capturedPhotos[index] = e.target.result;
+          loadedCount++;
+          if (loadedCount === files.length) {
+            updatePhotoGridUI();
+            document.getElementById('btn-retake').classList.remove('hidden');
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function resetPhotos() {
+      capturedPhotos = [null, null, null, null];
+      updatePhotoGridUI();
+      document.getElementById('btn-retake').classList.add('hidden');
+    }
+
+    function updatePhotoGridUI() {
+      let filledCount = 0;
+      for (let i = 0; i < 4; i++) {
+        const slot = document.getElementById(`slot-${i}`);
+        if (capturedPhotos[i]) {
+          filledCount++;
+          slot.innerHTML = `<img src="${capturedPhotos[i]}" class="w-full h-full object-cover rounded-lg">`;
+          slot.classList.remove('border-dashed');
+          slot.classList.add('border-solid', 'border-amber-500');
+        } else {
+          slot.innerHTML = `<span class="text-xs text-zinc-600 font-bold">#${i + 1}</span>`;
+          slot.classList.add('border-dashed');
+          slot.classList.remove('border-solid', 'border-amber-500');
+        }
+      }
+
+      document.getElementById('photo-count').innerText = filledCount;
+      const btnNext = document.getElementById('btn-next-filter');
+      
+      if (filledCount === 4) {
+        btnNext.disabled = false;
+        btnNext.className = "w-full py-3 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black rounded-xl transition shadow-lg cursor-pointer text-sm flex items-center justify-center space-x-2";
+      } else {
+        btnNext.disabled = true;
+        btnNext.className = "w-full py-3 bg-zinc-800 text-zinc-500 font-bold rounded-xl transition cursor-not-allowed text-sm flex items-center justify-center space-x-2";
+      }
+    }
+
+
+    /* ================= F. FILTER SELECTION LOGIC ================= */
+    function initFilterButtons() {
+      const container = document.getElementById('filter-buttons-container');
+      container.innerHTML = '';
+
+      FILTERS.forEach(f => {
+        const btn = document.createElement('button');
+        btn.id = `btn-filter-${f.id}`;
+        btn.onclick = () => applyFilterSelection(f.id);
+        btn.className = 'px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-semibold rounded-lg border border-zinc-700 transition text-left flex items-center justify-between';
+        btn.innerHTML = `<span>${f.name}</span><i class="fa-solid fa-wand-magic-sparkles text-[10px] text-amber-500/0"></i>`;
+        container.appendChild(btn);
+      });
+      highlightActiveFilterBtn();
+    }
+
+    function setFilterApplyMode(mode) {
+      applyMode = mode;
+      document.getElementById('mode-all').className = mode === 'all' 
+        ? 'flex-1 py-1.5 rounded-md text-center bg-amber-600 text-zinc-950 font-bold'
+        : 'flex-1 py-1.5 rounded-md text-center text-zinc-400 hover:text-zinc-200';
+      document.getElementById('mode-individual').className = mode === 'individual'
+        ? 'flex-1 py-1.5 rounded-md text-center bg-amber-600 text-zinc-950 font-bold'
+        : 'flex-1 py-1.5 rounded-md text-center text-zinc-400 hover:text-zinc-200';
+
+      document.getElementById('individual-photo-selectors').classList.toggle('hidden', mode !== 'individual');
+      highlightActiveFilterBtn();
+    }
+
+    function setSelectedPhotoIndex(idx) {
+      selectedPhotoIndex = idx;
+      const btns = document.querySelectorAll('.photo-idx-btn');
+      btns.forEach((btn, i) => {
+        if (i === idx) {
+          btn.className = 'photo-idx-btn px-2 py-1 text-xs rounded bg-amber-600 text-zinc-950 font-bold border border-amber-500';
+        } else {
+          btn.className = 'photo-idx-btn px-2 py-1 text-xs rounded bg-zinc-800 text-zinc-400 border border-zinc-700';
+        }
+      });
+      highlightActiveFilterBtn();
+    }
+
+    function applyFilterSelection(filterId) {
+      if (applyMode === 'all') {
+        photoFilters = [filterId, filterId, filterId, filterId];
+      } else {
+        photoFilters[selectedPhotoIndex] = filterId;
+      }
+      highlightActiveFilterBtn();
+      renderWantedPosterCanvas();
+    }
+
+    function highlightActiveFilterBtn() {
+      const activeFilterId = applyMode === 'all' ? photoFilters[0] : photoFilters[selectedPhotoIndex];
+      FILTERS.forEach(f => {
+        const btn = document.getElementById(`btn-filter-${f.id}`);
+        if (btn) {
+          if (f.id === activeFilterId) {
+            btn.className = 'px-3 py-2 bg-amber-600 text-zinc-950 text-xs font-bold rounded-lg border border-amber-400 transition text-left flex items-center justify-between shadow';
+          } else {
+            btn.className = 'px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-semibold rounded-lg border border-zinc-700 transition text-left flex items-center justify-between';
+          }
+        }
+      });
+    }
+
+
+    /* ================= D & G. CANVA WANTED POSTER GENERATOR ================= */
+    async function renderWantedPosterCanvas() {
+      const canvas = posterCanvas;
+      const W = canvas.width;  // 1240 px (scaled down for preview, exports at high res)
+      const H = canvas.height; // 1754 px A4 ratio
+
+      // Clear Canvas
+      ctx.clearRect(0, 0, W, H);
+
+      // 1. Background Paper Texture Effect
+      ctx.fillStyle = '#f4ebd0';
+      ctx.fillRect(0, 0, W, H);
+
+      // Paper grain noise
+      ctx.fillStyle = 'rgba(58, 50, 42, 0.03)';
+      for (let i = 0; i < W; i += 8) {
+        for (let j = 0; j < H; j += 8) {
+          if (Math.random() > 0.5) {
+            ctx.fillRect(i, j, 4, 4);
+          }
+        }
+      }
+
+      // Outer Vintage Border Lines
+      ctx.strokeStyle = '#211c18';
+      ctx.lineWidth = 8;
+      ctx.strokeRect(30, 30, W - 60, H - 60);
+
+      ctx.lineWidth = 3;
+      ctx.strokeRect(42, 42, W - 84, H - 84);
+
+      // 2. BREAKING NEWS Boxes Left & Right
+      ctx.fillStyle = '#211c18';
+      ctx.fillRect(55, 55, 230, 50);
+      ctx.fillRect(W - 285, 55, 230, 50);
+
+      ctx.fillStyle = '#f4ebd0';
+      ctx.font = 'bold 22px "Rye", serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('BREAKING', 170, 77);
+      ctx.fillText('NEWS', 170, 97);
+
+      ctx.fillText('BREAKING', W - 170, 77);
+      ctx.fillText('NEWS', W - 170, 97);
+
+      // 3. Center Header Title ✦ PPG CLASSIFIED ✦
+      ctx.fillStyle = '#211c18';
+      ctx.font = 'bold 36px "Rye", serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('✦ PPG CLASSIFIED ✦', W / 2, 92);
+
+      // 4. Dark Info Bar: VOL. 02, NO. 2026, GELAR KARYA, KELOMPOK B PPKn
+      ctx.fillStyle = '#211c18';
+      ctx.fillRect(55, 120, W - 110, 45);
+
+      ctx.fillStyle = '#f4ebd0';
+      ctx.font = 'bold 18px "Special Elite", monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('VOL. 02  |  NO. 2026  |  GELAR KARYA  |  KELOMPOK B PPKn', W / 2, 148);
+
+      // 5. Giant Header "WANTED"
+      ctx.fillStyle = '#211c18';
+      ctx.font = '900 135px "Rye", serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('WANTED', W / 2, 280);
+
+      // 6. Two Horizontal Divider Lines
+      ctx.lineWidth = 6;
+      ctx.beginPath();
+      ctx.moveTo(55, 300);
+      ctx.lineTo(W - 55, 300);
+      ctx.stroke();
+
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(55, 308);
+      ctx.lineTo(W - 55, 308);
+      ctx.stroke();
+
+      // 7. Area 4 Foto Grid 2x2
+      const gridX = 75;
+      const gridY = 330;
+      const gridW = W - 150; // 1090
+      const gridH = 1080;
+      
+      const photoW = (gridW - 30) / 2; // 530
+      const photoH = (gridH - 30) / 2; // 525
+
+      const photoCoords = [
+        { x: gridX, y: gridY },
+        { x: gridX + photoW + 30, y: gridY },
+        { x: gridX, y: gridY + photoH + 30 },
+        { x: gridX + photoW + 30, y: gridY + photoH + 30 }
+      ];
+
+      // Draw Photos onto Canvas asynchronously
+      for (let i = 0; i < 4; i++) {
+        const coord = photoCoords[i];
+        
+        // Photo Inner Border Box
+        ctx.strokeStyle = '#211c18';
+        ctx.lineWidth = 4;
+        ctx.strokeRect(coord.x, coord.y, photoW, photoH);
+
+        if (capturedPhotos[i]) {
+          await drawFilteredPhoto(ctx, capturedPhotos[i], photoFilters[i], coord.x + 6, coord.y + 6, photoW - 12, photoH - 12);
+        } else {
+          ctx.fillStyle = '#ebdcb9';
+          ctx.fillRect(coord.x + 6, coord.y + 6, photoW - 12, photoH - 12);
+          ctx.fillStyle = '#a39274';
+          ctx.font = 'bold 28px "Special Elite", monospace';
+          ctx.textAlign = 'center';
+          ctx.fillText(`FOTO #${i + 1}`, coord.x + photoW / 2, coord.y + photoH / 2);
+        }
+      }
+
+      // 8. Footer Area
+      const footerY = 1440;
+      ctx.lineWidth = 4;
+      ctx.strokeRect(55, footerY, W - 110, 240);
+
+      // Border frame inner
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(63, footerY + 8, W - 126, 224);
+
+      // THANK YOU & FOR COMING Text
+      ctx.fillStyle = '#211c18';
+      ctx.font = '900 68px "Playfair Display", serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('THANK YOU', W / 2, footerY + 85);
+
+      ctx.font = 'bold 52px "Playfair Display", serif';
+      ctx.fillText('FOR COMING', W / 2, footerY + 155);
+
+      // 9. Stars & Decorative Ornament
+      ctx.font = '28px sans-serif';
+      ctx.fillText('★  ★  ★', W / 2, footerY + 205);
+
+      // 10. Date Format DD/MM/YY in Bottom Right Corner
+      const today = new Date();
+      const dd = String(today.getDate()).padStart(2, '0');
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      const yy = String(today.getFullYear()).slice(-2);
+      const dateStr = `${dd}/${mm}/${yy}`;
+
+      ctx.font = 'bold 22px "Special Elite", monospace';
+      ctx.textAlign = 'right';
+      ctx.fillText(`DATE: ${dateStr}`, W - 75, H - 45);
+
+      ctx.textAlign = 'left';
+      ctx.fillText(`PPG GELAR KARYA 2026`, 75, H - 45);
+    }
+
+    // Helper function to draw image with dynamic canvas context filters
+    function drawFilteredPhoto(context, imgSrc, filterId, x, y, w, h) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => {
+          context.save();
+          
+          // Find filter config
+          const fObj = FILTERS.find(f => f.id === filterId) || FILTERS[0];
+          context.filter = fObj.filter;
+
+          // Draw cropped & fitted image (object-fit cover equivalent)
+          const imgAspect = img.width / img.height;
+          const rectAspect = w / h;
+          let sx, sy, sw, sh;
+
+          if (imgAspect > rectAspect) {
+            sh = img.height;
+            sw = img.height * rectAspect;
+            sx = (img.width - sw) / 2;
+            sy = 0;
+          } else {
+            sw = img.width;
+            sh = img.width / rectAspect;
+            sx = 0;
+            sy = (img.height - sh) / 2;
+          }
+
+          context.drawImage(img, sx, sy, sw, sh, x, y, w, h);
+          context.restore();
+          resolve();
+        };
+        img.src = imgSrc;
+      });
+    }
+
+
+    /* ================= H. CASH PAYMENT & DOWNLOAD LOGIC ================= */
+    function openPaymentModal() {
+      if (isPaymentConfirmed) return;
+      document.getElementById('modal-payment').classList.remove('hidden');
+    }
+
+    function closePaymentModal() {
+      document.getElementById('modal-payment').classList.add('hidden');
+    }
+
+    function processPaymentConfirmation() {
+      isPaymentConfirmed = true;
+      closePaymentModal();
+
+      // Update UI Status Box
+      const statusBox = document.getElementById('payment-status-box');
+      statusBox.className = 'mb-6 p-4 rounded-xl border bg-emerald-950/30 border-emerald-800/60 text-emerald-300 flex items-start space-x-3';
+      statusBox.innerHTML = `
+        <i class="fa-solid fa-circle-check text-xl text-emerald-400 mt-0.5"></i>
+        <div class="text-xs space-y-1">
+          <p class="font-bold text-emerald-300 text-sm">Terima kasih! Pembayaran tunai telah dikonfirmasi.</p>
+          <p class="text-emerald-200/80">Silahkan klik tombol di bawah untuk mengunduh Wanted Poster hasil sesi Anda.</p>
+        </div>
+      `;
+
+      // Enable Download Button & Disable Confirm Button
+      const btnConfirm = document.getElementById('btn-confirm-pay');
+      btnConfirm.disabled = true;
+      btnConfirm.className = 'w-full py-3 bg-zinc-800 text-zinc-500 font-bold text-sm rounded-xl border border-zinc-700 cursor-not-allowed hidden';
+
+      const btnDownload = document.getElementById('btn-download-poster');
+      btnDownload.disabled = false;
+      btnDownload.className = 'w-full py-4 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black text-base rounded-xl shadow-lg transition flex items-center justify-center space-x-2 cursor-pointer animate-bounce';
+    }
+
+    function downloadPoster() {
+      if (!isPaymentConfirmed) {
+        alert('Silahkan konfirmasi pembayaran tunai terlebih dahulu.');
+        return;
+      }
+
+      // Generate High-Res Canvas download
+      const link = document.createElement('a');
+      link.download = 'PPG-Photobooth-Kelompok-B-PPKn-2026.png';
+      link.href = posterCanvas.toDataURL('image/png', 1.0);
+      link.click();
+    }
+  </script>
+</body>
+</html>
